@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteY="25dp">
+    <!-- A CardView that contains a TextView -->
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/replayCardViewID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="@color/blue"
+        card_view:cardCornerRadius="20dp"
+        card_view:cardElevation="12dp">
+
+        <RelativeLayout
+            android:id="@+id/cardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layoutDirection="ltr">
+
+            <TextView
+                android:id="@+id/userNameID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/rounded_corner"
+                android:gravity="left"
+                android:text="USERNAME" />
+
+            <RelativeLayout
+                android:id="@+id/titleContentid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bestAnswerID"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorAccent"
+                android:backgroundTint="@drawable/rounded_corner">
+
+
+                <TextView
+                    android:id="@+id/Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/titlequestionid"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="WHAT ARE YOU DOING"
+                    android:textAlignment="textStart"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    android:gravity="start" />
+
+
+                <TextView
+                    android:id="@+id/titlequestionid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@drawable/rounded_corner"
+                    android:text="TITLE"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bestAnswerID"
+                style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:backgroundTint="@color/darkorange"
+                android:elevation="0dp"
+                android:gravity="right"
+                android:padding="0dp"
+                android:text="Best Answer"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

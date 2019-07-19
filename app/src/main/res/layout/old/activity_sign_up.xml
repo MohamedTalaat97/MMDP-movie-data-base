@@ -1,0 +1,100 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+
+        android:src="@drawable/o20" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/clogo"/>
+
+        <EditText
+            android:id="@+id/ET_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="User Name"
+            android:drawableLeft="@drawable/user2"/>
+
+
+        <EditText
+            android:id="@+id/ET_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Age"
+            android:drawableLeft="@drawable/age"
+            />
+
+
+
+        <EditText
+            android:id="@+id/ET_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Password"
+            android:drawableLeft="@drawable/lock"/>
+
+        <EditText
+            android:id="@+id/ET_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="email"
+            android:drawableLeft="@drawable/email"/>
+
+        <Spinner
+            android:id="@+id/sp_type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/trans"
+            android:drawableLeft="@drawable/type"
+            style="@style/text"
+
+            />
+
+        <EditText
+            android:id="@+id/ET_motivation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Motivation (Optional)"
+            android:drawableLeft="@drawable/mot"/>
+
+        <Button
+            android:id="@+id/BT_sign_up"
+            style="@style/text"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@android:color/transparent"
+            android:text="Create Account" />
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

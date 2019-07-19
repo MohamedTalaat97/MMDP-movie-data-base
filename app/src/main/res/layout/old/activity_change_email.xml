@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.easyc.Views.options">
+
+
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/o25" />
+
+    <EditText
+        android:id="@+id/emailchangetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="false"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textWebEmailAddress" />
+
+    <TextView
+        android:id="@+id/textviewchangeemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/emailchangetext"
+        android:layout_alignBottom="@+id/emailchangetext"
+        android:layout_toLeftOf="@+id/emailchangetext"
+        android:layout_toStartOf="@+id/emailchangetext"
+        android:text="New Email*"
+        style="@style/text"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/changeemailbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="117dp"
+        style="@style/text"
+        android:layout_toEndOf="@+id/textviewchangeemail"
+        android:layout_toRightOf="@+id/textviewchangeemail"
+        android:text="Change Email" />
+</RelativeLayout>

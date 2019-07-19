@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context=".Views.ExamViews.quizzes">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+
+        android:src="@drawable/o20" />
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/o22" />
+
+
+    <LinearLayout
+        android:id="@+id/l"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="7dp"
+            android:text="Quiz"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_info"
+            android:src="@drawable/menu" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/quiz_cat"
+        style="@style/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/l"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:text="by category" />
+
+
+    <Button
+        android:id="@+id/quiz_level"
+        style="@style/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quiz_cat"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:text="by level" />
+
+
+    <Button
+        android:id="@+id/quiz_up"
+        style="@style/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quiz_level"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:text="up your level" />
+
+    <Button
+        android:id="@+id/quiz_grades"
+        style="@style/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quiz_up"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:text="see your grades" />
+
+</RelativeLayout>

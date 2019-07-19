@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MMDP</string>
+
+    ////////////////////////////////////////
+    <string-array name="userType">
+        <item>Student</item>
+        <item>Instructor</item>
+    </string-array>
+
+</resources>
+
