@@ -1,15 +1,6 @@
 package com.example.mmdp;
 
 
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-
 public final class QueryUtils {
 
 
@@ -33,7 +24,7 @@ public final class QueryUtils {
 
     }
 
-
+/*
     public static ArrayList<Fixture> extractEarthquakes() {
 
 
@@ -63,5 +54,5 @@ public final class QueryUtils {
 
         return fixtures;
     }
-
+*/
 }

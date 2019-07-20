@@ -22,5 +22,10 @@ public class Media {
         this.poster_link = poster_link;
     }
 
+    public String getTitle ()
+    {
+
+        return name;
+    }
 
 }

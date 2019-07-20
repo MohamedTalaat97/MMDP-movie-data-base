@@ -1,12 +1,16 @@
 package com.example.mmdp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -15,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar action_bar;
     ImageView home_background;
+    EditText search_input;
+    Button search_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
         action_bar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(action_bar);
         home_background = findViewById(R.id.background);
+        search_input = findViewById(R.id.search_input);
+        search_btn = findViewById(R.id.search_btn);
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                search();
+            }
+        });
 
     }
 
@@ -45,8 +60,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_search:
+
                 // User chose the "Favorite" action, mark the current item
-                // as a favorite...
+                search_input.setVisibility(View.VISIBLE);
+                search_btn.setVisibility(View.VISIBLE);
                 return true;
 
 
@@ -71,7 +88,30 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(w.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 
     }
+
+    private void search()
+    {
+        String t= search_input.getText().toString();
+        if(!t.isEmpty() || t != " ")
+        {
+
+            Intent intent = new Intent(this, SearchActivity.class);
+            search_input.setVisibility(View.INVISIBLE);
+            search_btn.setVisibility(View.INVISIBLE);
+            startActivity(intent);
+            //pass info
+        }
+
+
+
+
+
+
+
+
+    }
 /*
+
     void goTo(Class s) {
 
 
@@ -89,5 +129,6 @@ public class MainActivity extends AppCompatActivity {
     }
 */
     //go to restore your account class
+
 
 }

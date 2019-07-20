@@ -5,18 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class ListAdapter extends ArrayAdapter<Fixture> {
+public class ListAdapter extends ArrayAdapter<Media> {
 
 
 
     private int resourceLayout;
     private Context mContext;
 
-    public ListAdapter(Context context, int resource, List<Fixture> items) {
+    public ListAdapter(Context context, int resource, List<Media> items) {
         super(context, resource, items);
         this.resourceLayout = resource;
         this.mContext = context;
@@ -33,24 +34,16 @@ public class ListAdapter extends ArrayAdapter<Fixture> {
             v = vi.inflate(resourceLayout, null);
         }
 
-        Fixture p = getItem(position);
+        Media p = getItem(position);
 
         if (p != null) {
-            TextView tt1 = (TextView) v.findViewById(R.id.home_name);
-            TextView tt2 = (TextView) v.findViewById(R.id.date);
-            TextView tt3 = (TextView) v.findViewById(R.id.away_name);
+            TextView title = (TextView) v.findViewById(R.id.item_title);
+            ImageView  poster = (ImageView) v.findViewById(R.id.item_poster);
 
-            if (tt1 != null) {
-                tt1.setText(p.GetHome());
+            if (title != null) {
+                title.setText(p.getTitle());
             }
 
-            if (tt2 != null) {
-                tt2.setText(p.GetDate());
-            }
-
-            if (tt3 != null) {
-                tt3.setText(p.GetAway());
-            }
         }
 
         return v;

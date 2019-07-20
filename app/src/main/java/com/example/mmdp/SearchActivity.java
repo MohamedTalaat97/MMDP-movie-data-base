@@ -22,34 +22,30 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
-public class FixturesActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
 
-    private  String REQUEST_URL ="http://www.omdbapi.com/?apikey=28b6bce0";
+    private String REQUEST_URL = "http://www.omdbapi.com/?apikey=28b6bce0";
     String movie_name = "";
-    private   Uri.Builder builder;
-    public static final String LOG_TAG = FixturesActivity.class.getName();
+    private Uri.Builder builder;
+    public static final String LOG_TAG = SearchActivity.class.getName();
     HashMap<String, Integer> map;
-    ListView FixturesListView;
+    //CalcDate();
+    ListView MediaListView = findViewById(R.id.search_ListView);
     ProgressBar pb;
 
-//take name of searched  movei here from opening activity
+    //take name of searched  movei here from opening activity
     //make the layout
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fixture);
-        CalcDate();
-
-         builder = new Uri.Builder();
-        REQUEST_URL =  Uri.parse("http://www.omdbapi.com/?apikey=28b6bce0")
+        setContentView(R.layout.activity_search_results);
+        builder = new Uri.Builder();
+        REQUEST_URL = Uri.parse("http://www.omdbapi.com/?apikey=28b6bce0")
                 .buildUpon()
                 .appendQueryParameter("s", movie_name).toString();
 
@@ -63,50 +59,30 @@ public class FixturesActivity extends AppCompatActivity {
 
 
     }
-/*
-    private void updateUi(ArrayList<Fixture> fixtures) {
+
+    private void updateUi(ArrayList<Media> media_array) {
 
 
-        FixturesListView = (ListView) findViewById(R.id.list);
-        FixturesListView.setEmptyView(findViewById(R.id.nomatchestextview));
+        MediaListView.setEmptyView(findViewById(R.id.nosearch));
 
-        TextView tv = (TextView) findViewById(R.id.nomatchestextview);
+        TextView tv = (TextView) findViewById(R.id.nosearch);
         pb = (ProgressBar) findViewById(R.id.arProgressBar);
 
-        tv.setText("no matches this week");
+        tv.setText("no results");
         pb.setVisibility(View.INVISIBLE);
 
-        ListAdapter customAdapter = new ListAdapter(this, R.layout.fixture_item, fixtures);
+        ListAdapter customAdapter = new ListAdapter(this, R.layout.media_item, media_array);
 
-        FixturesListView.setAdapter(customAdapter);
-
-    }
-*/
-
-    private void CalcDate() {
-
-
-        Date c = Calendar.getInstance().getTime();
-
-
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        today = df.format(c);
-
-        int noOfDays = 7;
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(c);
-        calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
-        Date date = calendar.getTime();
-
-        SimpleDateFormat dff = new SimpleDateFormat("yyyy-MM-dd");
-        week = df.format(date);
+        MediaListView.setAdapter(customAdapter);
 
     }
+
+
     private class MatchAsyncTask extends AsyncTask<String, Void, ArrayList<Media>> {
 
         @Override
 
-        protected ArrayList<Media> doInBackground(String ...passed_url) {
+        protected ArrayList<Media> doInBackground(String... passed_url) {
 
             URL url = createUrl(passed_url[0]);
 
@@ -129,12 +105,12 @@ public class FixturesActivity extends AppCompatActivity {
 
 
         @Override
-        protected void onPostExecute(ArrayList<Media> m) {
-            if (m == null) {
+        protected void onPostExecute(ArrayList<Media> arr) {
+            if (arr == null) {
                 return;
             }
 
-            updateUi(m);
+            updateUi(arr);
         }
 
 
@@ -223,6 +199,7 @@ public class FixturesActivity extends AppCompatActivity {
                     boolean responce = res.getBoolean("Responce");
                     JSONArray arr = res.getJSONArray("Search");
                     for (int i = 0; i < arr.length(); i++) {
+
                         JSONObject m = arr.getJSONObject(i);
                         String title = m.getString("Title");
                         String year = m.getString("Year");
@@ -241,4 +218,6 @@ public class FixturesActivity extends AppCompatActivity {
             }
             return null;
 
-        }}}
+        }
+    }
+}
