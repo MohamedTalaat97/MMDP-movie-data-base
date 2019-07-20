@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">MMDP</string>
+    <string name="search_hint">name of movie or tv show</string>
 
     ////////////////////////////////////////
     <string-array name="userType">
         <item>Student</item>
         <item>Instructor</item>
     </string-array>
+
 
 </resources>
 

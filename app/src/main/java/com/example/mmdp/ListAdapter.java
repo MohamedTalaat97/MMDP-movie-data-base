@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public class ListAdapter extends ArrayAdapter<Media> {
 
         if (p != null) {
             TextView title = (TextView) v.findViewById(R.id.item_title);
-            ImageView  poster = (ImageView) v.findViewById(R.id.item_poster);
+            //ImageView  poster = (ImageView) v.findViewById(R.id.item_poster);
 
             if (title != null) {
                 title.setText(p.getTitle());

@@ -29,12 +29,12 @@ public class SearchActivity extends AppCompatActivity {
 
 
     private String REQUEST_URL = "http://www.omdbapi.com/?apikey=28b6bce0";
-    String movie_name = "";
+    String movie_name = ""; // hyege mn el activity ele fat7a
     private Uri.Builder builder;
     public static final String LOG_TAG = SearchActivity.class.getName();
     HashMap<String, Integer> map;
     //CalcDate();
-    ListView MediaListView = findViewById(R.id.search_ListView);
+    ListView MediaListView ;
     ProgressBar pb;
 
     //take name of searched  movei here from opening activity
@@ -44,6 +44,14 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+            movie_name= null;
+        } else {
+            movie_name= extras.getString("query");
+        }
+
         builder = new Uri.Builder();
         REQUEST_URL = Uri.parse("http://www.omdbapi.com/?apikey=28b6bce0")
                 .buildUpon()
@@ -51,7 +59,7 @@ public class SearchActivity extends AppCompatActivity {
 
 //can make other requests
 
-        MatchAsyncTask task = new MatchAsyncTask();
+        MediaAsyncTask task = new MediaAsyncTask();
         task.execute(REQUEST_URL);
 
 
@@ -63,6 +71,7 @@ public class SearchActivity extends AppCompatActivity {
     private void updateUi(ArrayList<Media> media_array) {
 
 
+        MediaListView = (ListView) findViewById(R.id.search_ListView);
         MediaListView.setEmptyView(findViewById(R.id.nosearch));
 
         TextView tv = (TextView) findViewById(R.id.nosearch);
@@ -78,7 +87,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    private class MatchAsyncTask extends AsyncTask<String, Void, ArrayList<Media>> {
+    private class MediaAsyncTask extends AsyncTask<String, Void, ArrayList<Media>> {
 
         @Override
 
@@ -196,7 +205,7 @@ public class SearchActivity extends AppCompatActivity {
                 int totalResults = res.getInt("totalResults");
 
                 if (totalResults != 0) {
-                    boolean responce = res.getBoolean("Responce");
+                    boolean responce = res.getBoolean("Response");
                     JSONArray arr = res.getJSONArray("Search");
                     for (int i = 0; i < arr.length(); i++) {
 
@@ -206,7 +215,7 @@ public class SearchActivity extends AppCompatActivity {
                         String type = m.getString("Type");
                         String poster = m.getString("Poster");
 
-                        Media new_item = new Media(title, year, type, poster);
+                        Media new_item = new Media(title+ " ("+year+')', year, type, poster);
 
                         Media_array.add(new_item);
 
