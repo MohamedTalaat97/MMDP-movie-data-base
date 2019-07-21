@@ -1,14 +1,17 @@
 package com.example.mmdp;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +26,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -32,9 +34,9 @@ public class SearchActivity extends AppCompatActivity {
     String movie_name = ""; // hyege mn el activity ele fat7a
     private Uri.Builder builder;
     public static final String LOG_TAG = SearchActivity.class.getName();
-    HashMap<String, Integer> map;
-    //CalcDate();
-    ListView MediaListView ;
+
+    ArrayList<Media> MEDIA_ARRAY;
+    ListView MediaListView;
     ProgressBar pb;
 
     //take name of searched  movei here from opening activity
@@ -46,10 +48,10 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_results);
 
         Bundle extras = getIntent().getExtras();
-        if(extras == null) {
-            movie_name= null;
+        if (extras == null) {
+            movie_name = null;
         } else {
-            movie_name= extras.getString("query");
+            movie_name = extras.getString("query");
         }
 
         builder = new Uri.Builder();
@@ -57,7 +59,8 @@ public class SearchActivity extends AppCompatActivity {
                 .buildUpon()
                 .appendQueryParameter("s", movie_name).toString();
 
-//can make other requests
+
+        //can make other requests
 
         MediaAsyncTask task = new MediaAsyncTask();
         task.execute(REQUEST_URL);
@@ -68,7 +71,7 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private void updateUi(ArrayList<Media> media_array) {
+    private void updateUi(final ArrayList<Media> media_array) {
 
 
         MediaListView = (ListView) findViewById(R.id.search_ListView);
@@ -84,8 +87,25 @@ public class SearchActivity extends AppCompatActivity {
 
         MediaListView.setAdapter(customAdapter);
 
+
+        MediaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                toast(MEDIA_ARRAY.get(position).getTitle(), getApplicationContext());
+                // get title ab3to l activity media info w el async bta3ha el data bta3t el movie
+                //w b3d kda momken y3ml add fe el data base
+
+            }
+        });
+
     }
 
+    public void toast(String msg, Context w) {
+        Toast.makeText(w.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+
+    }
 
     private class MediaAsyncTask extends AsyncTask<String, Void, ArrayList<Media>> {
 
@@ -198,7 +218,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 return null;
             }
-            ArrayList<Media> Media_array = new ArrayList<Media>();
+            MEDIA_ARRAY = new ArrayList<Media>();
 
             try {
                 JSONObject res = new JSONObject(Responce);
@@ -215,12 +235,12 @@ public class SearchActivity extends AppCompatActivity {
                         String type = m.getString("Type");
                         String poster = m.getString("Poster");
 
-                        Media new_item = new Media(title+ " ("+year+')', year, type, poster);
+                        Media new_item = new Media(title + " (" + year + ')', year, type, poster);
 
-                        Media_array.add(new_item);
+                        MEDIA_ARRAY.add(new_item);
 
                     }
-                    return Media_array;
+                    return MEDIA_ARRAY;
                 }
             } catch (JSONException e) {
                 Log.e(LOG_TAG, "Problem parsing the earthquake JSON results", e);

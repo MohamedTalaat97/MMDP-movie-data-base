@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
 public class MediaDB extends SQLiteOpenHelper {
 
 
@@ -18,7 +19,27 @@ public class MediaDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-       // db.execSQL();
+
+        String createQuery = "CREATE TABLE " +MediaContract.MediaTable.TABLE_NAME +'('
+                +MediaContract.MediaTable.COLUMN_TITLE +"TEXT PRIMARY KEY "
+                +MediaContract.MediaTable.COLUMN_RATED +"TEXT "
+                +MediaContract.MediaTable.COLUMN_ROTTEN_RATING +" TEXT "
+                +MediaContract.MediaTable.COLUMN_IMDB_RATING +" TEXT "
+                +MediaContract.MediaTable.COLUMN_RUN_TIME +" TEXT "
+                +MediaContract.MediaTable.COLUMN_DIRECTOR +" TEXT "
+                +MediaContract.MediaTable.COLUMN_WRITERs +" TEXT "
+                +MediaContract.MediaTable.COLUMN_ACTORS +" TEXT "
+                +MediaContract.MediaTable.COLUMN_AWARRDS +" TEXT "
+                +MediaContract.MediaTable.COLUMN_BOXOFFICE +" TEXT "
+                +MediaContract.MediaTable.COLUMN_COUNTRY +" TEXT "
+                +MediaContract.MediaTable.COLUMN_LANGUAGE +" TEXT "
+                +MediaContract.MediaTable.COLUMN_PLOT +" TEXT "
+                +MediaContract.MediaTable.COLUMN_TITLE +" TEXT "
+                +MediaContract.MediaTable.COLUMN_YEAR +" TEXT "
+                +MediaContract.MediaTable.COLUMN_TYPE +" TEXT );";
+
+
+        db.execSQL(createQuery);
 
     }
 
