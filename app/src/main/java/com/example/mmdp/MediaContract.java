@@ -2,10 +2,13 @@ package com.example.mmdp;
 
 import android.provider.BaseColumns;
 
-public final class Contract {
+public final class MediaContract {
 
 
-    public static final class MediaEntry implements BaseColumns{
+    private MediaContract() {
+    }
+
+    public static final class MediaTable implements BaseColumns {
 
 
         public static final String TABLE_NAME = "media";
@@ -25,14 +28,6 @@ public final class Contract {
         public static final String COLUMN_ROOTEN_RATING = "rotten";
         public static final String COLUMN_BOXOFFICE = "boxoffice";
         public static final String COLUMN_POSTER = "poster";
-
-
-
-
-
-
-
-
 
 
     }

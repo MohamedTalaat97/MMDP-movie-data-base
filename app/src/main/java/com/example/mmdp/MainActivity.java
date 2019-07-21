@@ -5,15 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView home_background;
     EditText search_input;
     Button search_btn;
+    ImageView background;
+    Animation biganim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         home_background = findViewById(R.id.background);
         search_input = findViewById(R.id.search_input);
         search_btn = findViewById(R.id.search_btn);
+        background = findViewById(R.id.background);
+        biganim = AnimationUtils.loadAnimation(this, R.anim.godown);
+        background.startAnimation(biganim);
 
 
     }
@@ -52,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_add:
                 // User chose the "Settings" item, show the app settings UI...
-                toast("add a new movie",getApplicationContext());
+                //toast("add a new movie",getApplicationContext());
+                Intent i = new Intent(this,MediaInfoActivity.class);
+                startActivity(i);
 
                 return true;
 
