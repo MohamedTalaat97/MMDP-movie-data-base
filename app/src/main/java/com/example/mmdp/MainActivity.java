@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -35,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
         action_bar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(action_bar);
         home_background = findViewById(R.id.background);
-        search_input = findViewById(R.id.search_input);
-        search_btn = findViewById(R.id.search_btn);
+        //search_input = findViewById(R.id.search_input);
+        //search_btn = findViewById(R.id.search_btn);
         background = findViewById(R.id.background);
         biganim = AnimationUtils.loadAnimation(this, R.anim.godown);
-        background.startAnimation(biganim);
+       background.startAnimation(biganim);
+
 
 
     }
@@ -60,16 +60,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_add:
                 // User chose the "Settings" item, show the app settings UI...
                 //toast("add a new movie",getApplicationContext());
-                Intent i = new Intent(this,MediaInfoActivity.class);
-                startActivity(i);
 
                 return true;
 
             case R.id.action_search:
 
                 // User chose the "Favorite" action, mark the current item
-                search_input.setVisibility(View.VISIBLE);
-                search_btn.setVisibility(View.VISIBLE);
+
                 return true;
 
 
@@ -95,21 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void search()
-    {
-        String t= search_input.getText().toString();
-        if(!t.isEmpty() || t != " ")
-        {
 
-            Intent intent = new Intent(this, SearchActivity.class);
-            search_input.setVisibility(View.INVISIBLE);
-            search_btn.setVisibility(View.INVISIBLE);
-            startActivity(intent);
-            //pass info
-        }
-
-
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the options menu from XML

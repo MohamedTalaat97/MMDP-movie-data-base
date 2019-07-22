@@ -22,12 +22,13 @@ public final class MediaContract {
         public static final String COLUMN_PLOT = "plot ";
         public static final String COLUMN_LANGUAGE = "language ";
         public static final String COLUMN_COUNTRY = "country ";
-        public static final String COLUMN_AWARRDS = "awards ";
+        public static final String COLUMN_AWARDS = "awards ";
         public static final String COLUMN_TYPE = "type ";
         public static final String COLUMN_IMDB_RATING = "imdb ";
         public static final String COLUMN_ROTTEN_RATING = "rotten ";
         public static final String COLUMN_BOXOFFICE = "boxoffice ";
         public static final String COLUMN_POSTER = "poster ";
+        public static final String COLUMN_Release = "release ";
 
 
     }

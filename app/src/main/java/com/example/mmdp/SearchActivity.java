@@ -1,6 +1,8 @@
 package com.example.mmdp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -62,14 +64,17 @@ public class SearchActivity extends AppCompatActivity {
 
         //can make other requests
 
-        MediaAsyncTask task = new MediaAsyncTask();
-        task.execute(REQUEST_URL);
+        if (isNetworkConnected()) {
+            MediaAsyncTask task = new MediaAsyncTask();
+            task.execute(REQUEST_URL);
 
+        } else toast("Check Your Internet Connection", this);
 
         ArrayList<Media> media_array = new ArrayList<Media>();
 
 
     }
+
 
     private void updateUi(final ArrayList<Media> media_array) {
 
@@ -93,9 +98,13 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                toast(MEDIA_ARRAY.get(position).getTitle(), getApplicationContext());
-                // get title ab3to l activity media info w el async bta3ha el data bta3t el movie
-                //w b3d kda momken y3ml add fe el data base
+                //the movie that was clicked on
+                //pass to the media info activity
+                String temp = MEDIA_ARRAY.get(position).getTitle();
+                toast(temp, getApplicationContext());
+                Intent i = new Intent(getApplicationContext(),MediaInfoActivity.class);
+                i.putExtra("title", temp);
+                startActivity(i);
 
             }
         });
@@ -235,7 +244,7 @@ public class SearchActivity extends AppCompatActivity {
                         String type = m.getString("Type");
                         String poster = m.getString("Poster");
 
-                        Media new_item = new Media(title + " (" + year + ')', year, type, poster);
+                        Media new_item = new Media(title , year, type, poster);
 
                         MEDIA_ARRAY.add(new_item);
 
@@ -248,5 +257,11 @@ public class SearchActivity extends AppCompatActivity {
             return null;
 
         }
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 }

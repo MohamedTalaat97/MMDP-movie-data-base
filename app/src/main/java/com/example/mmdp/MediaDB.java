@@ -29,7 +29,7 @@ public class MediaDB extends SQLiteOpenHelper {
                 +MediaContract.MediaTable.COLUMN_DIRECTOR +" TEXT "
                 +MediaContract.MediaTable.COLUMN_WRITERs +" TEXT "
                 +MediaContract.MediaTable.COLUMN_ACTORS +" TEXT "
-                +MediaContract.MediaTable.COLUMN_AWARRDS +" TEXT "
+                +MediaContract.MediaTable.COLUMN_AWARDS +" TEXT "
                 +MediaContract.MediaTable.COLUMN_BOXOFFICE +" TEXT "
                 +MediaContract.MediaTable.COLUMN_COUNTRY +" TEXT "
                 +MediaContract.MediaTable.COLUMN_LANGUAGE +" TEXT "

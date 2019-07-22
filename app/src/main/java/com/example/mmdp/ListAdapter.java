@@ -40,7 +40,7 @@ public class ListAdapter extends ArrayAdapter<Media> {
             //ImageView  poster = (ImageView) v.findViewById(R.id.item_poster);
 
             if (title != null) {
-                title.setText(p.getTitle());
+                title.setText(p.getTitle() +" ("+p.getYear()+")");
             }
 
         }

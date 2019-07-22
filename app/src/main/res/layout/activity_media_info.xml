@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="15dp">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -22,6 +23,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/text_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -30,67 +32,73 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/text_run"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top"
                     android:layout_weight="1"
-                    android:text="run time "
+
                     android:textSize="15dp" />
 
 
                 <TextView
+                    android:id="@+id/text_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top"
+
                     android:layout_weight="1"
-                    android:text="rate"
-                    android:textSize="20dp" />
+
+                    android:textSize="15dp" />
 
 
                 <TextView
+                    android:id="@+id/text_genre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
                     android:layout_weight="1"
-                    android:text="realease"
-                    android:textSize="20dp" />
+
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/image_poster"
                 android:layout_alignParentLeft="true"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/a4" />
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="5dp">
 
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
                     android:src="@drawable/imdbicon" />
 
                 <TextView
+                    android:id="@+id/text_imdb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
@@ -100,13 +108,13 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/imdbicon" />
+                    android:src="@drawable/rotten" />
 
                 <TextView
+                    android:id="@+id/text_rotten"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
