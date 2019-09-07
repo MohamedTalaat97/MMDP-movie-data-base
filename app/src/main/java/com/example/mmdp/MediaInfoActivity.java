@@ -1,6 +1,9 @@
 package com.example.mmdp;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +32,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 
 public class MediaInfoActivity extends AppCompatActivity {
 
@@ -36,7 +39,8 @@ public class MediaInfoActivity extends AppCompatActivity {
     private String REQUEST_URL = "http://www.omdbapi.com/?apikey=28b6bce0";
     private Uri.Builder builder;
     public static final String LOG_TAG = MediaInfoActivity.class.getName();
-    private String title;
+    private String title, year, rated, runtime, genre, director, writer, actors, plot, country, awards, poster, language, imdbRating, boxOffice, type;
+
     private Media MEDIA_OBJ;
 
     /*
@@ -45,25 +49,45 @@ public class MediaInfoActivity extends AppCompatActivity {
 */
 
     ImageView poster_image;
-
-
+    FloatingActionButton fab;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media_info);
-        title = getIntent().getStringExtra("title");
+        Intent i = getIntent();
+        if (i.hasExtra("title"))
+            title = getIntent().getStringExtra("title");
+        else toast("no title sent to mediainfoactivity",getApplicationContext());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //add movie to data base here
-                Snackbar.make(view, "movie added", Snackbar.LENGTH_LONG)
+                //getting a database connection
+
+                //replace all this with a function call mn el controller
+
+                MediaDB dbhelper = new MediaDB(getApplicationContext());
+                SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+                ContentValues cv = new ContentValues();
+                cv.put(MediaContract.MediaTable.COLUMN_TITLE, title);
+
+                String m = "";
+
+                if (db.insert(MediaContract.MediaTable.TABLE_NAME,null,cv) != -1) {
+                    //add movie to data base here
+                  m = "movie added";
+                }
+                else m = "error";
+
+                Snackbar.make(view, m ,Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
             }
         });
 
@@ -71,7 +95,7 @@ public class MediaInfoActivity extends AppCompatActivity {
         builder = new Uri.Builder();
         REQUEST_URL = Uri.parse("http://www.omdbapi.com/?apikey=28b6bce0")
                 .buildUpon()
-                .appendQueryParameter("t",title).toString();
+                .appendQueryParameter("t", title).toString();
 
         //can make other requests
 
@@ -79,28 +103,12 @@ public class MediaInfoActivity extends AppCompatActivity {
         task.execute(REQUEST_URL);
 
 
-        ArrayList<Media> media_array = new ArrayList<Media>();
-        ContentValues cv = new ContentValues();
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-        cv.put(MediaContract.MediaTable.COLUMN_TITLE, "aqua");
-
-
-        //db.insert(table name , null ,cv)
-        //if == -1 insertion failed
-
     }
 
+    public void toast(String msg, Context w) {
+        Toast.makeText(w.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+
+    }
 
     private class MediaAsyncTask extends AsyncTask<String, Void, Media> {
 
@@ -148,7 +156,7 @@ public class MediaInfoActivity extends AppCompatActivity {
             rotten.setText(media_object.getRotten_rating());
 
 
-            poster_image=findViewById(R.id.image_poster);
+            poster_image = findViewById(R.id.image_poster);
             MediaInfoActivity.DownloadImagesTask task = new MediaInfoActivity.DownloadImagesTask();
             task.execute(media_object.getPoster_link());
 
@@ -237,7 +245,7 @@ public class MediaInfoActivity extends AppCompatActivity {
         private Media extractFeatureFromJson(String Responce) {
 
             if (Responce.isEmpty() || Responce == null) {
-                Log.d(LOG_TAG,"responce is empty");
+                Log.d(LOG_TAG, "responce is empty");
 
                 return null;
             }
@@ -249,45 +257,110 @@ public class MediaInfoActivity extends AppCompatActivity {
 
                 JSONObject res = new JSONObject(Responce);
 
-                String responce = res.getString("Response");
-                String title = res.getString("Title");
-                String year = res.getString("Year");
-                String rated = res.getString("Rated");
-                String runtime = res.getString("Runtime");
-                String genre = res.getString("Genre");
-                String director = res.getString("Director");
-                String writer = res.getString("Writer");
-                String actors = res.getString("Actors");
-                String plot = res.getString("Plot");
-                String country = res.getString("Country");
-                String awards = res.getString("Awards");
-                String poster = res.getString("Poster");
-                String language = res.getString("Language");
-                JSONArray rating_array = res.getJSONArray("Ratings");
+
+                String responce;
+
+                if (res.has("Response"))
+                    responce = res.getString("Response");
+                else responce = "N/A";
+
+
+                if (res.has("Year"))
+                    year = res.getString("Year");
+                else year = "N/A";
+
+
+                if (res.has("Rated"))
+                    rated = res.getString("Rated");
+                else rated = "N/A";
+
+
+                if (res.has("Runtime"))
+                    runtime = res.getString("Runtime");
+                else runtime = "N/A";
+
+
+                if (res.has("Genre"))
+                    genre = res.getString("Genre");
+                else genre = "N/A";
+
+
+                if (res.has("Director"))
+                    director = res.getString("Director");
+                else director = "N/A";
+
+
+                if (res.has("Writer"))
+                    writer = res.getString("Writer");
+                else writer = "N/A";
+
+
+                if (res.has("Actors"))
+                    actors = res.getString("Actors");
+                else actors = "N/A";
+
+
+                if (res.has("Plot"))
+                    plot = res.getString("Plot");
+                else plot = "N/A";
+
+
+                if (res.has("Country"))
+                    country = res.getString("Country");
+                else country = "N/A";
+
+
+                if (res.has("Awards"))
+                    awards = res.getString("Awards");
+                else awards = "N/A";
+
+                if (res.has("Poster"))
+                    poster = res.getString("Poster");
+                else poster = "N/A";
+
+                if (res.has("Language"))
+                    language = res.getString("Language");
+                else language = "N/A";
 
                 String rotten = "";
-                try {
-                    for (int i = 0; i < rating_array.length(); i++) {
-                        JSONObject temp = rating_array.getJSONObject(i);
 
-                        String source = temp.getString("Source");
-                        if (source == "Rotten Tomatoes") {
-                            rotten = temp.getString("Value");
+                if (res.has("Ratings")) {
+
+                    JSONArray rating_array = res.getJSONArray("Ratings");
+
+
+                    try {
+                        for (int i = 0; i < rating_array.length(); i++) {
+                            JSONObject temp = rating_array.getJSONObject(i);
+
+                            String source = temp.getString("Source");
+                            if (source == "Rotten Tomatoes") {
+                                rotten = temp.getString("Value");
+                            }
+
                         }
-
-                    }
-                    rotten = "N/A";
-                } catch (JSONException e)
-                    {
-                        Log.e(LOG_TAG,"error in rotten tomatoes");
+                        rotten = "N/A";
+                    } catch (JSONException e) {
+                        Log.e(LOG_TAG, "error in rotten tomatoes");
                     }
 
 
+                }
 
 
-                String imdbRating = res.getString("imdbRating");
-                String boxOffice = res.getString("BoxOffice");
-                String type = res.getString("Type");
+                if (res.has("imdbRating"))
+                    imdbRating = res.getString("imdbRating");
+                else imdbRating = "N/A";
+
+
+                if (res.has("Type"))
+                    type = res.getString("Type");
+                else type = "N/A";
+
+                if (res.has("BoxOffice"))
+                    boxOffice = res.getString("BoxOffice");
+                else boxOffice = "N/A";
+
 
                 Media new_item = new Media(title, year, type, poster, genre, imdbRating,
                         rotten, rated, director, actors, writer, language
@@ -331,7 +404,7 @@ public class MediaInfoActivity extends AppCompatActivity {
                 bis.close();
                 is.close();
             } catch (IOException e) {
-                Log.e("media info ","Error getting the image from server : " + e.getMessage().toString());
+                Log.e("media info ", "Error getting the image from server : " + e.getMessage().toString());
             }
             return bm;
             //---------------------------------------------------

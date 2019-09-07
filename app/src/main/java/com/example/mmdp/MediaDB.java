@@ -21,22 +21,7 @@ public class MediaDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String createQuery = "CREATE TABLE " +MediaContract.MediaTable.TABLE_NAME +'('
-                +MediaContract.MediaTable.COLUMN_TITLE +"TEXT PRIMARY KEY "
-                +MediaContract.MediaTable.COLUMN_RATED +"TEXT "
-                +MediaContract.MediaTable.COLUMN_ROTTEN_RATING +" TEXT "
-                +MediaContract.MediaTable.COLUMN_IMDB_RATING +" TEXT "
-                +MediaContract.MediaTable.COLUMN_RUN_TIME +" TEXT "
-                +MediaContract.MediaTable.COLUMN_DIRECTOR +" TEXT "
-                +MediaContract.MediaTable.COLUMN_WRITERs +" TEXT "
-                +MediaContract.MediaTable.COLUMN_ACTORS +" TEXT "
-                +MediaContract.MediaTable.COLUMN_AWARDS +" TEXT "
-                +MediaContract.MediaTable.COLUMN_BOXOFFICE +" TEXT "
-                +MediaContract.MediaTable.COLUMN_COUNTRY +" TEXT "
-                +MediaContract.MediaTable.COLUMN_LANGUAGE +" TEXT "
-                +MediaContract.MediaTable.COLUMN_PLOT +" TEXT "
-                +MediaContract.MediaTable.COLUMN_TITLE +" TEXT "
-                +MediaContract.MediaTable.COLUMN_YEAR +" TEXT "
-                +MediaContract.MediaTable.COLUMN_TYPE +" TEXT );";
+                +MediaContract.MediaTable.COLUMN_TITLE +"TEXT PRIMARY KEY );";
 
 
         db.execSQL(createQuery);

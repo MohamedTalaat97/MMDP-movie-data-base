@@ -238,6 +238,8 @@ public class SearchActivity extends AppCompatActivity {
                     JSONArray arr = res.getJSONArray("Search");
                     for (int i = 0; i < arr.length(); i++) {
 
+
+                        //can remove this
                         JSONObject m = arr.getJSONObject(i);
                         String title = m.getString("Title");
                         String year = m.getString("Year");
